@@ -42,7 +42,7 @@ int main(int argc,char *argv[])
     }
 
 	// O procedimento abaixo eh utilizado para "setar" a interface em modo promiscuo
-	strcpy(ifr.ifr_name, "enp4s0");
+	strcpy(ifr.ifr_name, "eth0");
 	if(ioctl(sockd, SIOCGIFINDEX, &ifr) < 0)
 		printf("erro no ioctl!");
 	ioctl(sockd, SIOCGIFFLAGS, &ifr);
@@ -55,5 +55,6 @@ int main(int argc,char *argv[])
 		// impress�o do conteudo - exemplo Endereco Destino e Endereco Origem
 		printf("MAC Destino: %x:%x:%x:%x:%x:%x \n", buff1[0],buff1[1],buff1[2],buff1[3],buff1[4],buff1[5]);
 		printf("MAC Origem:  %x:%x:%x:%x:%x:%x \n\n", buff1[6],buff1[7],buff1[8],buff1[9],buff1[10],buff1[11]);
+		printf("Protocolo:  %x %x\n\n", buff1[12],buff1[13]);
 	}
 }

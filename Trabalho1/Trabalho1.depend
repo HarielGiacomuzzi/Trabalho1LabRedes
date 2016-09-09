@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1473454606 source:/home/labredes/Trabalho1LabRedes/Trabalho1/main.cpp
+	<stdlib.h>
+	<stdio.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<sys/ioctl.h>
+	<string.h>
+	<unistd.h>
+	<net/if.h>
+	<netinet/ether.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<netinet/in_systm.h>
+

@@ -23,15 +23,19 @@ enum TCPService{
 class IPProtocol
 {
     public:
-        IPProtocol(void *package);
+        IPProtocol();
         ~IPProtocol();
         // sendś back the tipe of the protocol inside
         int identifyProtocol();
         //sends back the size of the package in bytes
         int identifyPackageSize();
+        // sets the current package
+        void setPackage(unsigned char *package);
+        // sends back the type of service inside the IP protocol
+        int identifyTypeOfService();
     protected:
     private:
-        void *package;
+        unsigned char *package;
 };
 
 #endif // IPPROTOCOL_H

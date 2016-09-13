@@ -9,6 +9,7 @@
 #include <sys/ioctl.h>
 #include <string.h>
 #include <unistd.h>
+#include "IPProtocol.h"
 
 /* Diretorios: net, netinet, linux contem os includes que descrevem */
 /* as estruturas de dados do header dos protocolos   	  	        */
@@ -49,12 +50,17 @@ int main(int argc,char *argv[])
 	ifr.ifr_flags |= IFF_PROMISC;
 	ioctl(sockd, SIOCSIFFLAGS, &ifr);
 
+    IPProtocol* packageInspector = new IPProtocol();
+
+
 	// recepcao de pacotes
 	while (1) {
    		recv(sockd,(char *) &buff1, sizeof(buff1), 0x0);
 		// impress�o do conteudo - exemplo Endereco Destino e Endereco Origem
 		printf("MAC Destino: %x:%x:%x:%x:%x:%x \n", buff1[0],buff1[1],buff1[2],buff1[3],buff1[4],buff1[5]);
-		printf("MAC Origem:  %x:%x:%x:%x:%x:%x \n\n", buff1[6],buff1[7],buff1[8],buff1[9],buff1[10],buff1[11]);
-		printf("Protocolo:  %x %x\n\n", buff1[12],buff1[13]);
+		printf("MAC Origem:  %x:%x:%x:%x:%x:%x \n", buff1[6],buff1[7],buff1[8],buff1[9],buff1[10],buff1[11]);
+        packageInspector->setPackage(buff1);
+		printf("Size in bytes: %i\n" , packageInspector->identifyPackageSize());
+		printf("Size in bytes: %i\n\n" , packageInspector->identifyTypeOfService());
 	}
 }

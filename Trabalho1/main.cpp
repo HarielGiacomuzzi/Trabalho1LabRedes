@@ -51,20 +51,34 @@ int main(int argc,char *argv[])
 	ioctl(sockd, SIOCSIFFLAGS, &ifr);
 
     IPProtocol* packageInspector = new IPProtocol();
-
+    float udpCount = 0;
+    float tcpCount =0;
 
 	// recepcao de pacotes
 	while (1) {
    		recv(sockd,(char *) &buff1, sizeof(buff1), 0x0);
 		// impress�o do conteudo - exemplo Endereco Destino e Endereco Origem
-		printf("MAC Destino: %x:%x:%x:%x:%x:%x \n", buff1[0],buff1[1],buff1[2],buff1[3],buff1[4],buff1[5]);
-		printf("MAC Origem:  %x:%x:%x:%x:%x:%x \n", buff1[6],buff1[7],buff1[8],buff1[9],buff1[10],buff1[11]);
+	//	printf("MAC Destino: %x:%x:%x:%x:%x:%x \n", buff1[0],buff1[1],buff1[2],buff1[3],buff1[4],buff1[5]);
+		//printf("MAC Origem:  %x:%x:%x:%x:%x:%x \n", buff1[6],buff1[7],buff1[8],buff1[9],buff1[10],buff1[11]);
         packageInspector->setPackage(buff1);
-		printf("Size in bytes: %i\n" , packageInspector->identifyPackageSize());
+		//printf("Size in bytes: %i\n" , packageInspector->identifyPackageSize());
+        if (packageInspector->identifyTypeOfService() == UDP){
+            udpCount = udpCount + 1.0;
+		 }
+        if(packageInspector->identifyTypeOfService() == TCP){
+            tcpCount= tcpCount + 1.0;
+		 }
         if (packageInspector->identifyTypeOfService() == UDP || packageInspector->identifyTypeOfService() == TCP){
-            printf("UDP/TCP Destination Port: %i\n" , packageInspector->getDestinationPort());
-            printf("UDP/TCP Source Port: %i\n" , packageInspector->getSourcePort());
+           // printf("UDP/TCP Destination Port: %i\n" , packageInspector->getDestinationPort());
+           // printf("UDP/TCP Source Port: %i\n" , packageInspector->getSourcePort());
         }
-		printf("Type of service %i\n\n" , packageInspector->identifyTypeOfService());
+		//printf("Type of service %i\n\n" , packageInspector->identifyTypeOfService());
+		printf("Total UDP %f\n" , udpCount );
+		printf("Total TCP %f\n" , tcpCount );
+		printf("Total Porgentagem UDP %f\n" , (udpCount/(tcpCount+udpCount))*100.0);
+		printf("Total Porgentagem TCP %f\n\n" , (tcpCount/(udpCount+tcpCount))*100.0);
+
+
+
 	}
 }

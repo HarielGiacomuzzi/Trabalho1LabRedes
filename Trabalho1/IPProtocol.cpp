@@ -40,3 +40,25 @@ int IPProtocol::identifyProtocol(){
         return ARP;
     }
 }
+
+
+int IPProtocol::getDestinationPort(){
+    int port = 0;
+    if(this->identifyTypeOfService() == UDP || this->identifyTypeOfService() == TCP){
+        port=(package[36]<<8)|(package[37]);
+        return port;
+    }
+    printf("###########################\nNão foi possivel identificar a porta do pacote por não ser um pacote UDP/TCP\n###########################");
+    return 0;
+}
+
+int IPProtocol::getSourcePort(){
+    int port = 0;
+    if(this->identifyTypeOfService() == UDP || this->identifyTypeOfService() == TCP){
+        port=(package[34]<<8)|(package[35]);
+        return port;
+    }
+    printf("###########################\nNão foi possivel identificar a porta do pacote por não ser um pacote UDP/TCP\n###########################");
+    return 0;
+}
+

@@ -33,6 +33,12 @@ class IPProtocol
         void setPackage(unsigned char *package);
         // sends back the type of service inside the IP protocol
         int identifyTypeOfService();
+        // sends back the number of the destination port
+        int getDestinationPort();
+        // sends back the number of the source port
+        int getSourcePort();
+        // get the website of a HTTP package
+
     protected:
     private:
         unsigned char *package;

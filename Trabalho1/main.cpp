@@ -61,6 +61,10 @@ int main(int argc,char *argv[])
 		printf("MAC Origem:  %x:%x:%x:%x:%x:%x \n", buff1[6],buff1[7],buff1[8],buff1[9],buff1[10],buff1[11]);
         packageInspector->setPackage(buff1);
 		printf("Size in bytes: %i\n" , packageInspector->identifyPackageSize());
-		printf("Size in bytes: %i\n\n" , packageInspector->identifyTypeOfService());
+        if (packageInspector->identifyTypeOfService() == UDP || packageInspector->identifyTypeOfService() == TCP){
+            printf("UDP/TCP Destination Port: %i\n" , packageInspector->getDestinationPort());
+            printf("UDP/TCP Source Port: %i\n" , packageInspector->getSourcePort());
+        }
+		printf("Type of service %i\n\n" , packageInspector->identifyTypeOfService());
 	}
 }

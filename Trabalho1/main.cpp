@@ -23,7 +23,7 @@
 
 #define BUFFSIZE 1518
 
-// Atencao!! Confira no /usr/include do seu sisop o nome correto
+// Atencao!! Confira no /usr/include do seu sisop o nome correto 
 // das estruturas de dados dos protocolos.
 
   unsigned char buff1[BUFFSIZE]; // buffer de recepcao

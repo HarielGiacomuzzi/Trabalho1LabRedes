@@ -62,3 +62,34 @@ int IPProtocol::getSourcePort(){
     return 0;
 }
 
+int* IPProtocol::getDestinationIPFromHTTP(){
+    int ip[4] = {0,0,0,0};
+    if(this->identifyHTTP()){
+        ip[0] = package[26];
+        ip[1] = package[27];
+        ip[2] = package[28];
+        ip[3] = package[29];
+        return ip;
+    }
+    return NULL;
+}
+
+int* IPProtocol::getSourceIPFromHTTP(){
+    int port[4] = {0,0,0,0};
+    if(this->identifyHTTP()){
+        port[0] = package[30];
+        port[1] = package[31];
+        port[2] = package[32];
+        port[3] = package[33];
+        return port;
+    }
+    return NULL;
+}
+
+bool IPProtocol::identifyHTTP(){
+    if(this->identifyTypeOfService() == TCP && (this->getSourcePort() == 80 || this->getDestinationPort() == 80 ) ){
+        return true;
+    }
+    return false;
+}
+

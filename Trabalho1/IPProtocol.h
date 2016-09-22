@@ -38,6 +38,10 @@ class IPProtocol
         // sends back the number of the source port
         int getSourcePort();
         // get the website of a HTTP package
+        int* getDestinationIPFromHTTP();
+        int* getSourceIPFromHTTP();
+        // identifies if a package is from HTTP type
+        bool identifyHTTP();
 
     protected:
     private:

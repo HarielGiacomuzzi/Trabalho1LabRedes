@@ -23,7 +23,7 @@
 
 #define BUFFSIZE 1518
 
-// Atencao!! Confira no /usr/include do seu sisop o nome correto 
+// Atencao!! Confira no /usr/include do seu sisop o nome correto
 // das estruturas de dados dos protocolos.
 
   unsigned char buff1[BUFFSIZE]; // buffer de recepcao
@@ -71,6 +71,16 @@ int main(int argc,char *argv[])
         if (packageInspector->identifyTypeOfService() == UDP || packageInspector->identifyTypeOfService() == TCP){
            // printf("UDP/TCP Destination Port: %i\n" , packageInspector->getDestinationPort());
            // printf("UDP/TCP Source Port: %i\n" , packageInspector->getSourcePort());
+        }
+        if (packageInspector->identifyHTTP()){
+            printf("HTTP Package.\n");
+            //TODO: verificar porque o ponteiro está vindo como NULL
+            if(packageInspector->getDestinationIPFromHTTP() != NULL && packageInspector->getSourceIPFromHTTP() != NULL){
+                int* source = packageInspector->getSourceIPFromHTTP();
+                int *destination = packageInspector->getDestinationIPFromHTTP();
+                printf("Source IP: %i.%i.%i.%i.\n", source[0],source[1],source[2],source[3]);
+                printf("Destination IP: %i.%i.%i.%i.\n", destination[0],destination[1],destination[2],destination[3]);
+            }
         }
 		//printf("Type of service %i\n\n" , packageInspector->identifyTypeOfService());
 		printf("Total UDP %f\n" , udpCount );

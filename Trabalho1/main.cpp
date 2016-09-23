@@ -74,7 +74,6 @@ int main(int argc,char *argv[])
         }
         if (packageInspector->identifyHTTP()){
             printf("HTTP Package.\n");
-            //TODO: verificar porque o ponteiro está vindo como NULL
             if(packageInspector->getDestinationIPFromHTTP() != NULL && packageInspector->getSourceIPFromHTTP() != NULL){
                 int* source = packageInspector->getSourceIPFromHTTP();
                 int *destination = packageInspector->getDestinationIPFromHTTP();

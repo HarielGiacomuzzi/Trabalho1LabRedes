@@ -41,3 +41,24 @@
 	<arpa/inet.h>
 	<netinet/in_systm.h>
 
+1474561883 source:/home/hariel/Desktop/Trabalho1LabRedes/Trabalho1/IPProtocol.cpp
+	"IPProtocol.h"
+	<stdio.h>
+
+1474561883 /home/hariel/Desktop/Trabalho1LabRedes/Trabalho1/IPProtocol.h
+
+1474629834 source:/home/hariel/Desktop/Trabalho1LabRedes/Trabalho1/main.cpp
+	<stdlib.h>
+	<stdio.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<sys/ioctl.h>
+	<string.h>
+	<unistd.h>
+	"IPProtocol.h"
+	<net/if.h>
+	<netinet/ether.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<netinet/in_systm.h>
+

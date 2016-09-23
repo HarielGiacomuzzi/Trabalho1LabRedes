@@ -63,7 +63,7 @@ int IPProtocol::getSourcePort(){
 }
 
 int* IPProtocol::getDestinationIPFromHTTP(){
-    int ip[4] = {0,0,0,0};
+    int *ip = new int[4];
     if(this->identifyHTTP()){
         ip[0] = package[26];
         ip[1] = package[27];
@@ -75,13 +75,13 @@ int* IPProtocol::getDestinationIPFromHTTP(){
 }
 
 int* IPProtocol::getSourceIPFromHTTP(){
-    int port[4] = {0,0,0,0};
+    int *ip = new int[4];
     if(this->identifyHTTP()){
-        port[0] = package[30];
-        port[1] = package[31];
-        port[2] = package[32];
-        port[3] = package[33];
-        return port;
+        ip[0] = package[30];
+        ip[1] = package[31];
+        ip[2] = package[32];
+        ip[3] = package[33];
+        return ip;
     }
     return NULL;
 }
